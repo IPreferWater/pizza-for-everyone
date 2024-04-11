@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pizza-center-api
+  name: pizza-center-api
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: pizza-center-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pizza-center-api
+    spec:
+      containers:
+      - image: pizza-center-api:1.0.2
+        name: pizza-center-api
+        ports:
+        - containerPort: 8080
+        env:
+        - name: TIME_TO_CREATE_PIZZA_ORDER_MS
+          value: "5000ms"  # Set the value to 5000 milliseconds
+        
+        resources:
+          limits:
+            memory: "200Mi"  # Set the maximum memory usage to 200 MiB
+status: {}
